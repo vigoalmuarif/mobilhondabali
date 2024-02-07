@@ -45,7 +45,7 @@ const Page = async ({ params : {slug}}) => {
       <Heading
         title={data?.name}
         desc={
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur culpa error nihil unde aperiam beatae? Repellat id facilis illo quia facere neque ea."
+          `Miliki Mobil Honda ${data?.name} di Honda Bintang Tabanan.`
         }
       />
 
