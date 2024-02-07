@@ -109,7 +109,7 @@ export default async function Page() {
             <Reward />
           </div>
           <div className="w-full lg:w-1/2">
-            <div className="px-16">
+            <div className="">
               <div className="title text-center">
                 <h2>Testimonial</h2>
                 <p>Apa kata mereka setelah pembelian mobil di <span className="font-semibold">Honda Bintang Tabanan bersama saya</span></p>
