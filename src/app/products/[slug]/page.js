@@ -83,9 +83,9 @@ const Page = async ({ params : {slug}}) => {
         {data?.featureds.lists.map(item => 
           
         <FeaturedProduct.Body
-          key={item.id}
-          heading={item.title}
-          content={item.desc}
+          key={item?.id}
+          heading={item?.title}
+          content={item?.desc}
         />
           )}
       </FeaturedProduct>
