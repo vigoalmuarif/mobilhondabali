@@ -30,13 +30,6 @@ export const About = () => {
             mobil Honda yang berlokasi di Jl. Dr. Ir. Soekarno, Banjar Anyar,
             Kec. Kediri, Kabupaten Tabanan, Bali 82123.
           </p>
-          <p className="mb-3">
-            {" "}
-            Honda Bintang Tabanan disamping melayani permintaan kebutuhan mobil
-            juga menyediakan layanan perawatan servis berkala. Disamping itu,
-            menyediakan berbagai macam suku cadang asli atau yang sering disebut
-            dengan 3S yakni perawatan Sales, Service Sparepart.
-          </p>
           <p>
             Sebagai dealer Honda yang terbaik di kota Tabanan, Honda Bintang
             Tabanan ini siap memberikan pelayanan terbaik dan memuaskan bagi
@@ -59,7 +52,7 @@ export const About = () => {
           role="tabpanel"
           className="tab-content bg-base-100 border-base-300 rounded-box p-6"
         >
-          Mau pesan Mobil Honda di Dealer Resmi kami Honda Tebet Jakarta, saya
+          Mau pesan Mobil Honda di Dealer Resmi kami Honda Bintang Tabanan, saya
           siap membantu Anda :
           <ul className="list-disc ms-4">
             <li>Berlaku Seluruh Pulau Bali Pembelian Cash/Credit</li>
