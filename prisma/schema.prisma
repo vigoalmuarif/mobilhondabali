@@ -1,0 +1,132 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id              Int @id @default(autoincrement())
+  email           String @unique
+  name            String
+  blogs           Blog[]
+}
+
+model Blog {
+  id              Int @id @default(autoincrement())
+  title           String
+  content         String
+  author          User @relation(fields: [author_id], references: [id])
+  author_id       Int
+  published       Boolean @default(true)
+  slug            String? @unique
+  created_at      DateTime @default(now())
+  updated_at      DateTime? @default(now())
+}
+
+model Type {
+  id              Int @id @default(autoincrement())
+  name            String
+  image           String
+  slug            String? @unique
+  desc            String?
+  models          Model[]
+  colors          Color_Varian[]
+  images          Image_Type[]
+  featureds       Featured[]
+}
+
+model Color_Varian {
+  id              Int @id @default(autoincrement())
+  name            String
+  color_code      String
+  image           String
+  type            Type @relation(fields: [type_id], references: [id])
+  type_id         Int
+}
+
+model Model {
+  id              Int @id @default(autoincrement())
+  name            String @unique
+  price           Int
+  specifications  Specification[]
+  type            Type @relation(fields: [type_id], references: [id])
+  type_id         Int
+}
+
+model Specification {
+  id             Int @id @default(autoincrement())
+  name           String
+  model          Model @relation(fields: [model_id], references: [id])
+  model_id       Int
+}
+
+model Image_Type {
+  id             Int @id @default(autoincrement())
+  image          String
+  category       Category_Image_Type      
+  type           Type @relation(fields: [type_id], references: [id])
+  type_id        Int
+}
+
+model Featured {
+  id             Int @id @default(autoincrement())
+  title          String
+  desc           String
+  lists          Content_Featured[]
+  type           Type @relation(fields: [type_id], references: [id])
+  type_id        Int
+}
+
+model Content_Featured {
+  id             Int @id @default(autoincrement())
+  title          String
+  desc           String
+  featured       Featured @relation(fields: [featured_id], references: [id])
+  featured_id    Int
+}
+
+model Promo {
+  id              Int @id @default(autoincrement())
+  tite            String
+  sub_title       String?
+  image           String
+  status          Boolean @default(true)
+  slug            String? @unique
+}
+
+
+model Profile {
+  id              Int @id @default(autoincrement())
+  name            String
+  phone           String
+  image1          String?
+  image2          String?
+}
+
+model Testimonial {
+  id              Int @id @default(autoincrement())
+  customer_name   String
+  customer_image  String
+  content         String
+}
+
+model Gallery {
+  id              Int @id @default(autoincrement())
+  title           String
+  image           String
+}
+
+
+enum Category_Image_Type {
+  interior
+  exterior
+  other
+}

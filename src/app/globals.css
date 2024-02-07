@@ -2,32 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+*,::after,::before{
+  padding:0;
+   margin: 0;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  body{
+    @apply min-h-screen bg-slate-50 dark:bg-slate-900
+  }
+  h1{
+    @apply text-slate-950 text-4xl lg:text-5xl font-extrabold dark:text-slate-50 mb-3;
+  }
+  h2{
+    @apply text-slate-900 text-3xl lg:text-4xl font-bold dark:text-slate-100
+  }
+  h3{
+    @apply text-slate-800 text-2xl lg:text-3xl font-bold dark:text-slate-200
+  }
+  h4{
+    @apply text-slate-700 text-xl lg:text-2xl font-bold dark:text-slate-300
+  }
+  h5{
+    @apply text-slate-700 text-lg lg:text-xl font-bold dark:text-slate-400
+  }
+  h6{
+    @apply text-slate-700 text-base lg:text-lg font-bold dark:text-slate-500
+  }
+  p{
+    @apply text-slate-600 text-sm lg:text-base dark:text-slate-500 leading-relaxed text-pretty 
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
+
+.btnPrimary {
+  @apply text-white text-sm px-4 py-2.5 text-center font-medium rounded-full justify-center inline-flex bg-primary-600 border border-transparent hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-600 dark:focus:ring-primary-800;
+}
+.btnSecondary {
+  @apply text-gray-800 text-sm px-4 py-2.5 inline-flex text-center font-medium rounded-full justify-center bg-slate-200/70 border border-transparent hover:bg-slate-200 focus:ring-4 focus:ring-slate-300 dark:bg-slate-200 dark:hover:bg-slate-300 dark:focus:ring-slate-500;
+}
+.btnTertiary {
+  @apply text-primary-500 text-sm px-4 py-2.5 inline-flex text-center font-medium justify-center hover:bg-primary-400;
+}
+

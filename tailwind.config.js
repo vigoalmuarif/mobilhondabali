@@ -1,18 +1,35 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
+    "./node_modules/flowbite-react/lib/**/*.js",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+    container :{
+      padding : {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        // md: '2.5rem',
+        // lg: '4rem',
+        // xl: '5rem',
+        // '2xl':'6rem'
       },
+      center : true
+    },
+    extend: {
+      colors: {
+        primary: colors.red,
+        secondary: colors.purple,
+        neutral: colors.slate,
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require("flowbite/plugin"),
+    require("daisyui")
+  ],
 };

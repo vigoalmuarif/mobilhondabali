@@ -1,0 +1,22 @@
+.wrapper {
+    @apply bg-slate-100/95 border border-slate-200/90 shadow-sm rounded-2xl md:rounded-3xl  max-w-sm pb-2.5 w-full p-1 lg:p-2 relative h-[16.4rem] md:h-[16.9rem] lg:h-[20.2rem]
+}
+
+.wrapperImg{
+    @apply w-full h-28 lg:h-40 bg-purple-200/70 rounded-xl md:rounded-2xl mb-2 flex items-center
+}
+.imgCardProduct {
+    @apply rounded-xl md:rounded-2xl bg-transparent w-full max-h-[6rem] min-h-[5rem] lg:max-h-[150px] lg:min-h-24  object-contain
+}
+.wrapperContent{
+    @apply px-2 lg:px-4 absolute bottom-3 inset-x-0
+}
+.title {
+    @apply text-sm md:text-base text-slate-900 font-semibold truncate px-0.5
+}
+.price {
+    @apply my-3 text-xs md:text-sm text-slate-900 font-medium
+}
+.variantCardProduct {
+    @apply bg-primary-100/50 text-primary-400 font-normal mt-1 px-2.5 py-0.5
+}

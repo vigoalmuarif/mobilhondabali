@@ -1,0 +1,35 @@
+.footerWrapper {
+    @apply flex flex-wrap items-start px-6 pt-16 mt-28 mb-8 gap-y-14
+}
+
+.cardProfile {
+    @apply flex flex-col max-w-sm items-center bg-white border border-gray-200 rounded-3xl shadow lg:flex-row lg:max-w-xl dark:border-gray-700 dark:bg-gray-800 mx-auto
+}
+
+.imgProfileWrapper {
+    @apply flex w-full lg:w-6/12 min-h-44  lg:self-stretch   bg-primary-100 rounded-t-3xl lg:rounded-e-none lg:rounded-s-3xl gap-4 flex-wrap py-8 px-4;
+}
+
+.imgProfile {
+    @apply w-32 h-32 object-cover object-left-top rounded-full shadow-lg mx-auto self-center outline-dotted outline-offset-4 outline-4 outline-slate-400/90;
+}
+
+.profileName {
+    @apply mb-1 text-xl font-bold tracking-tight text-gray-900 dark:text-white;
+}
+
+.profileTitle{
+    @apply text-center font-medium text-slate-600 text-base;
+}
+
+.profileContactWrapper {
+    @apply flex flex-col flex-nowrap lg:w-6/12 w-full justify-center p-4 leading-normal;
+}
+
+.profileContactIconWrapper {
+    @apply bg-primary-100/80 self-start mx-auto rounded-full py-1.5 px-2.5 flex gap-2 justify-center my-4 
+}
+
+.profilePhone {
+    @apply text-lg text-center text-slate-700 font-semibold block
+}
