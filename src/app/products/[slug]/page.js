@@ -26,6 +26,11 @@ async function getProduct(slug) {
           price: "asc",
         },
       },
+      featureds :{
+        include:{
+          lists:true
+        },
+      },
       colors: true,
       _count:{
         select:{models:true}
@@ -70,33 +75,19 @@ const Page = async ({ params : {slug}}) => {
       <Featured />
 
       <FeaturedProduct
-        title={"Lorem ipsum dolor sit amet consectetur adipisicing elit."}
+        title={data?.featureds}
         subTitle={
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, laboriosam quis possimus mollitia doloribus iste."
         }
       >
+        {data?.featureds.lists.map(item => 
+          
         <FeaturedProduct.Body
-          heading={"consectetur dolor"}
-          content={
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi"
-          }
+          key={item.id}
+          heading={item.title}
+          content={item.desc}
         />
-        <FeaturedProduct.Body
-          heading={"consectetur dolor"}
-          content={
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi"
-          }
-        />
-        <FeaturedProduct.Body
-          heading={"Lorem ipsum elit"}
-          content={"Lorem doloribus dolor sit amet  adipisicing elit. Commodi"}
-        />
-        <FeaturedProduct.Body
-          heading={"elit ipsum dolor"}
-          content={
-            "adipisicing ipsum dolor sit amet consectetur adipisicing elit. Commodi"
-          }
-        />
+          )}
       </FeaturedProduct>
 
       <Spesifikasi>

@@ -40,7 +40,7 @@ model Type {
   models          Model[]
   colors          Color_Varian[]
   images          Image_Type[]
-  featureds       Featured[]
+  featureds       Featured?
 }
 
 model Color_Varian {
@@ -82,7 +82,7 @@ model Featured {
   desc           String
   lists          Content_Featured[]
   type           Type @relation(fields: [type_id], references: [id])
-  type_id        Int
+  type_id        Int @unique
 }
 
 model Content_Featured {
