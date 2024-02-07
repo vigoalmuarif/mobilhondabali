@@ -14,7 +14,7 @@
   const Body = ({ heading, content }) => {
     return (
       <div className="flex-col justify-center flex-wrap w-full md:w-6/12 lg:w-3/12 px-4">
-        <h6>{heading}</h6>
+        <h6 className="mb-2">{heading}</h6>
         <p>{content}</p>
       </div>
     );
