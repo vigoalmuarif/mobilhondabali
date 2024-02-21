@@ -14,7 +14,8 @@ import { Pagination } from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
-export const Spec = () => {
+export const Spec = ({data}) => {
+  console.log(data)
     return(
         <Swiper
         slidesPerView={"auto"}
@@ -39,56 +40,19 @@ export const Spec = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
+        {data?.map(item => 
+        <SwiperSlide key={item.id}>
          <div className="p-4 bg-slate-100/70 border border-slate-100 shadow-sm rounded-2xl max-w-lg">
-            <h6>test</h6>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
+            <h6>{item.name}</h6>
+            <ul className="list-disc pt-2 ms-5 text-sm lg:text-base mb-2">
+            {item?.specifications.map(spec => 
+              <li key={spec.id}>{spec.name}</li>
+              )}
+            </ul>
          </div>
         </SwiperSlide>
-        <SwiperSlide>
-         <div className="p-4 bg-slate-100 rounded-2xl max-w-lg">
-            <h6>test</h6>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-         </div>
-        </SwiperSlide>
-        <SwiperSlide>
-         <div className="p-4 bg-slate-100 rounded-2xl max-w-lg">
-            <h6>test</h6>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit.</p>
-         </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link href="/#">
-            <Image
-              src="/promo/honda2.webp"
-              width={700}
-              height={700}
-              alt="promo"
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link href="/#">
-            <Image
-              src="/promo/honda.webp"
-              width={700}
-              height={700}
-              alt="promo"
-            />
-          </Link>
-        </SwiperSlide>
+          
+          )}
       </Swiper>
     )
 }

@@ -27,7 +27,7 @@ model Blog {
   author_id       Int
   published       Boolean @default(true)
   slug            String? @unique
-  created_at      DateTime @default(now())
+  created_at      DateTime? @default(now())
   updated_at      DateTime? @default(now())
 }
 
@@ -41,15 +41,17 @@ model Type {
   colors          Color_Varian[]
   images          Image_Type[]
   featureds       Featured?
+  created_at      DateTime? @default(now())
+  updated_at      DateTime? @default(now())
 }
 
 model Color_Varian {
   id              Int @id @default(autoincrement())
   name            String
-  color_code      String
+  color_code      String?
   image           String
-  type            Type @relation(fields: [type_id], references: [id])
-  type_id         Int
+  type            Type? @relation(fields: [type_id], references: [id])
+  type_id         Int?
 }
 
 model Model {
@@ -57,23 +59,23 @@ model Model {
   name            String @unique
   price           Int
   specifications  Specification[]
-  type            Type @relation(fields: [type_id], references: [id])
-  type_id         Int
+  type            Type? @relation(fields: [type_id], references: [id])
+  type_id         Int?
 }
 
 model Specification {
   id             Int @id @default(autoincrement())
   name           String
-  model          Model @relation(fields: [model_id], references: [id])
-  model_id       Int
+  model          Model? @relation(fields: [model_id], references: [id])
+  model_id       Int?
 }
 
 model Image_Type {
   id             Int @id @default(autoincrement())
   image          String
   category       Category_Image_Type      
-  type           Type @relation(fields: [type_id], references: [id])
-  type_id        Int
+  type           Type? @relation(fields: [type_id], references: [id])
+  type_id        Int?
 }
 
 model Featured {
@@ -81,16 +83,16 @@ model Featured {
   title          String
   desc           String
   lists          Content_Featured[]
-  type           Type @relation(fields: [type_id], references: [id])
-  type_id        Int @unique
+  type           Type? @relation(fields: [type_id], references: [id])
+  type_id        Int? @unique
 }
 
 model Content_Featured {
   id             Int @id @default(autoincrement())
   title          String
   desc           String
-  featured       Featured @relation(fields: [featured_id], references: [id])
-  featured_id    Int
+  featured       Featured? @relation(fields: [featured_id], references: [id])
+  featured_id    Int?
 }
 
 model Promo {
@@ -100,6 +102,8 @@ model Promo {
   image           String
   status          Boolean @default(true)
   slug            String? @unique
+  created_at      DateTime @default(now())
+  updated_at      DateTime? @default(now())
 }
 
 
@@ -124,9 +128,29 @@ model Gallery {
   image           String
 }
 
+model Meta {
+  id              Int @id @default(autoincrement())
+  slug            String @unique
+  category        CategoryPageMeta
+  meta_title      String?
+  meta_desc       String?
+  meta_keyword    String?
+  meta_image      String?
+  og_title        String?
+  og_desc         String?
+  og_keyword      String?
+  og_image        String?
+
+}
+
 
 enum Category_Image_Type {
   interior
   exterior
   other
+}
+
+enum CategoryPageMeta {
+  product
+  blog
 }

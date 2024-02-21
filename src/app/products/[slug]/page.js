@@ -24,6 +24,9 @@ async function getProduct(slug) {
     },
     include: {
       models: {
+        include:{
+          specifications: true
+        },
         orderBy: {
           price: "asc",
         },
@@ -34,6 +37,7 @@ async function getProduct(slug) {
         },
       },
       colors: true,
+      images:true,
       _count: {
         select: { models: true },
       },
@@ -43,9 +47,29 @@ async function getProduct(slug) {
   return product;
 }
 
-const Page = async ({ params: { slug } }) => {
+export async function generateMetadata({ params, searchParams }, parent) {
+  // read route params
+  const slug = params.slug
+ 
+  // fetch data
+  const product = await prisma.meta.findUnique({
+    where:{
+      slug: slug
+    }
+  })
+ 
   const data = await getProduct(slug);
-  console.log(data?.featureds.lists);
+  return {
+    title: product?.meta_title ?? data?.name,
+    description: product?.meta_desc ?? data?.desc,
+    keywords: product?.meta_keyword.split(',') ?? ''
+  }
+}
+ 
+
+
+const Page = async ({ params: { slug }, searchParams }) => {
+  const data = await getProduct(slug);
   return (
     <>
       {!data && notFound()}
@@ -81,11 +105,13 @@ const Page = async ({ params: { slug } }) => {
 
       <Featured />
 
+      {data?.featureds && 
+      
       <FeaturedProduct
-        title={data?.featureds.title}
-        subTitle={data?.featureds.desc}
+        title={data?.featureds?.title}
+        subTitle={data?.featureds?.desc}
       >
-        {data?.featureds.lists.map((item) => (
+        {data?.featureds?.lists.map((item) => (
           <FeaturedProduct.Body
             key={item?.id}
             heading={item?.title}
@@ -93,112 +119,52 @@ const Page = async ({ params: { slug } }) => {
           />
         ))}
       </FeaturedProduct>
+      }
 
       <Spesifikasi>
         <h2 className="mb-2">Spesifikasi</h2>
         <p className="text-lg mt-3 mb-12">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex molestias
-          vitae voluptate tempore illo laudantium, dolorum excepturi quis et
-          sequi.
+          Masing-masing model mempunyai spesifikasi yang berbeda
         </p>
-        <Spec />
+        <Spec data={data?.models} />
       </Spesifikasi>
 
+      {data?.images.length > 0 && 
+      
       <section className="pt-24">
         <div className="container">
           <h2 className="mb-2">Design</h2>
           <p className="text-lg mt-3 mb-8">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-            molestias vitae voluptate tempore illo laudantium, dolorum excepturi
-            quis et sequi.
+            Mewahnya desain interior dan exterior dari mobil honda {data?.name}
           </p>
         </div>
         <div className="container mb-8">
           <h3 className="">Interior</h3>
         </div>
         <GalleryLightBox styles="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {data?.images.filter(item => item?.category === 'interior').map(item => 
           <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/red_stitches__1702043300899.jpg?w=1200&s=9d433c8036ff00518db4fcc34d59a206"
+            key={item?.id}
+            title={'Interior' + ' ' + data?.name+'_'+item?.id}
+            image={item?.image}
           />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/tilt&telescopic__1702043342735.jpg?w=1200&s=06ebae09f78167a52b1b28541521c014"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_steeringmodul__1701939157320.jpg?w=1200&s=099d168a92dcb22f12ac71554bea61da"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/meter_cluster__1702043387412.jpg?w=1200&s=e0d1636767a37e81e67b1c0213d4d067"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_doorpanel__1701681481583.jpg?w=1200&s=5bcbcb4101ade08c97f60959f5deca8b"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_memory__1701578109094.jpg?w=1200&s=ea0ff4c9810e0d066d234e060dccc27d"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_frarmrest__1701692725854.jpg?w=1200&s=b38816a9dc76c3ce0447bb9fce446405"
-          />
+            )}
         </GalleryLightBox>
         <div className="container mb-8 mt-14">
           <h3 className="">Exterior</h3>
         </div>
         <GalleryLightBox styles="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {data?.images.filter(item => item?.category === 'exterior').map(item => 
           <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/red_stitches__1702043300899.jpg?w=1200&s=9d433c8036ff00518db4fcc34d59a206"
+            key={item?.id}
+            title={'Exterior' + ' ' + data?.name+'_'+item?.id}
+            image={item?.image}
           />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/tilt&telescopic__1702043342735.jpg?w=1200&s=06ebae09f78167a52b1b28541521c014"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_steeringmodul__1701939157320.jpg?w=1200&s=099d168a92dcb22f12ac71554bea61da"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/meter_cluster__1702043387412.jpg?w=1200&s=e0d1636767a37e81e67b1c0213d4d067"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_doorpanel__1701681481583.jpg?w=1200&s=5bcbcb4101ade08c97f60959f5deca8b"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_memory__1701578109094.jpg?w=1200&s=ea0ff4c9810e0d066d234e060dccc27d"
-          />
-          <ImageList
-            title={data?.name}
-            image="https://www.honda-indonesia.com/glide/local/uploads/images/sections_items/f_frarmrest__1701692725854.jpg?w=1200&s=b38816a9dc76c3ce0447bb9fce446405"
-          />
+            )}
         </GalleryLightBox>
       </section>
-      {/* <section className="pt-24">
-        <div className="container">
-          <h2 className="mb-2">Perfoma</h2>
-          <p className="mb-14">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-            molestias vitae voluptate tempore illo laudantium, dolorum excepturi
-            quis et sequi.
-          </p>
-        </div>
-        <GalleryLightBox>
-          <div className="grid grid-cols-2 lg:grid-cols-3">
-            <ImageList title={data?.name} image="/pas_foto.jpg" />
-            <ImageList title={data?.name} image="/pas_foto.jpg" />
-            <ImageList title={data?.name} image="/pas_foto.jpg" />
-            <ImageList title={data?.name} image="/pas_foto.jpg" />
-            <ImageList title={data?.name} image="/pas_foto.jpg" />
-          </div>
-        </GalleryLightBox>
-      </section> */}
+      }
+
     </>
   );
 };

@@ -22,6 +22,12 @@ async function getProducts() {
 }
 export const revalidate = 10;
 
+export const metadata = {
+  title: 'Products',
+  description: 'Mobil Honda Bali Tabanan merupakan salah satu milik sales konsultan Budi Purni Riswanti pada Honda Bintang Tabanan Bali. Terdapat semua type mobil honda mulai dari honda brio, honda hr-v, honda, br-v, city hatchback, wrv, civic, mobilio, accord 2024',
+  keywords : ['budi purni riswanti', 'sales mobil honda', 'mobil honda bali', 'promo mobil honda', 'honda bintang tabanan', 'brio', 'brv', 'hrv', 'city hatchback', 'civic', 'mobilio', 'wrv', 'accord', 'mobil honda tabanan'],
+}
+
 export default async function Page() {
   const data = await getProducts();
   console.log(data);

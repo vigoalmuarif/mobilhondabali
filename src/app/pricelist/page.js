@@ -20,6 +20,12 @@ async function getProducts() {
   return products;
 }
 
+export const metadata = {
+  title: 'Price List',
+  description: 'Pricelist atau daftar harga  mobil honda bali 2024 mulai dari honda brio, honda hr-v, honda, br-v, city hatchback, wrv, civic, mobilio, accord',
+  keywords : ['budi purni riswanti', 'sales mobil honda', 'mobil honda bali', 'promo mobil honda', 'honda bintang tabanan', 'brio', 'brv', 'hrv', 'city hatchback', 'civic', 'mobilio', 'wrv', 'accord', 'mobil honda tabanan'],
+}
+
 export default async function PriceList() {
   const data = await getProducts();
   return (

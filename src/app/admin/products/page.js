@@ -112,10 +112,11 @@ export default async function Page() {
                 <td className="px-6 py-4">{item._count.colors}</td>
                 <td className="px-6 py-4">
                   <Dropdown dismissOnClick={false} label="kelola" className="" inline>
-                    <DropdownItem as="a" href={`/admin/type/${item.slug}`} target="_blank">
+                    <DropdownItem as="a" href={`/admin/products/${item.slug}/show`} target="_blank">
                       Ubah
                     </DropdownItem>
                     <DropdownItem
+                     as="a" href={`/admin/products/${item.slug}/delete`}
                       className="text-primary-500"
                     >
                       Hapus

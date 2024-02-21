@@ -3,10 +3,12 @@ import { Label, TextInput } from "flowbite-react";
 import { HiOutlineTrash } from "react-icons/hi2";
 import Card from "@/components/card/default";
 import { useState } from "react";
+import { Field, FieldArray, Form, FormikErrors, FormikProps, withFormik } from "formik";
 
 let nextID = 1;
 
-export default function Models() {
+export default function Models({test}) {
+  console.log(test)
   const [varian, setVarian] = useState([]);
   function handleVarian() {
     setVarian([...varian, { id: nextID++ }]);

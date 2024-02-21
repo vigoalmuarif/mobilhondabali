@@ -1,6 +1,6 @@
 
   
-  const ContentAdmin = ({ children, title = "judul?", subtitle }) => {
+  const ContentAdmin = ({ children, title = "", subtitle }) => {
     return (
       <div className="p-4 sm:ml-64">
         <div className="mt-14">
