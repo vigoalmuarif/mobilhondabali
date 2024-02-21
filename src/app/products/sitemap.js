@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/app/lib/constants'
+// import { BASE_URL } from '@/app/lib/constants'
 import { prisma } from "../../../lib/client";
  
 export async function generateSitemaps() {
@@ -19,7 +19,7 @@ export default async function sitemap({ id }) {
     }
   })
   return products.map((product) => ({
-    url: `${BASE_URL}/products/${product.slug}`,
+    url: `https://mobilhondabali.vercel.app/products/${product.slug}`,
     lastModified: product.updated_at,
   }))
 }
