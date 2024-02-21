@@ -1,5 +1,5 @@
 // import { BASE_URL } from '@/app/lib/constants'
-import { prisma } from "../../../lib/client";
+import { prisma } from "@/lib/client";
  
 export async function generateSitemaps() {
   // Fetch the total number of products and calculate the number of sitemaps needed
