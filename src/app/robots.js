@@ -1,7 +1,7 @@
 export default function robots() {
     return {
       rules: {
-        userAgent: '*',
+        userAgent: ['Googlebot','Applebot', 'Bingbot'],
         allow: '/',
         disallow: '/admin/',
       },
